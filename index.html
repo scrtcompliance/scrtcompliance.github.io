@@ -1,31 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logon</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sign in</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-box">
-            <div class="logo">
-                <img src="sap_logo.png">
-            </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="user">User</label>
-                    <input type="text" id="user" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit" class="login-btn">Log On</button>
-                <button type="button" class="change-password-btn">Change Password</button>
-            </form>
-        </div>
-    </div>
-    <script src="login.js"></script>
+<div class="page-bg"></div>
+
+
+<main class="container">
+<header class="brand">
+<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><rect width='10' height='10' x='1' y='1' fill='%23f05022'/><rect width='10' height='10' x='13' y='1' fill='%2329a5f5'/><rect width='10' height='10' x='1' y='13' fill='%232fb54a'/><rect width='10' height='10' x='13' y='13' fill='%23f7b500'/></svg>" alt="Logo" class="logo">
+<span class="brand-text">Microsoft</span>
+</header>
+
+
+<section class="signin-card" aria-labelledby="signinTitle">
+<h1 id="signinTitle">Sign in</h1>
+
+
+<label for="userInput" class="visually-hidden">Email, phone, or Skype</label>
+<input id="userInput" class="text-input" type="text" placeholder="Email, phone, or Skype" autocomplete="username">
+
+
+<p class="small">No account? <a href="#" id="createOne">Create one!</a></p>
+<p class="small"><a href="#" id="cantAccess">Can't access your account?</a></p>
+
+
+<div class="actions">
+<button id="backBtn" class="btn btn-ghost" type="button">Back</button>
+<button id="nextBtn" class="btn btn-primary" type="button">Next</button>
+</div>
+</section>
+
+
+<section class="signin-options">
+<button class="option-btn" type="button" aria-label="Sign-in options">
+<span class="key-icon" aria-hidden="true">🔑</span>
+Sign-in options
+</button>
+</section>
+
+
+<footer class="page-footer">
+<a href="#">Terms of use</a>
+<a href="#">Privacy & cookies</a>
+<button class="more-btn" aria-label="More">…</button>
+</footer>
+</main>
+
+
+<script src="script.js"></script>
 </body>
 </html>
