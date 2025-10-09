@@ -1,51 +1,24 @@
-// script.js
-// Save contents below into script.js
-(function(){
-const nextBtn = document.getElementById('nextBtn');
-const backBtn = document.getElementById('backBtn');
-const input = document.getElementById('userInput');
-const createOne = document.getElementById('createOne');
-const cantAccess = document.getElementById('cantAccess');
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const kembaliBtn = document.getElementById('kembaliBtn');
+    const selanjutnyaBtn = document.getElementById('selanjutnyaBtn');
 
-nextBtn.addEventListener('click', function(){
-const value = input.value.trim();
-if(!value){
-input.focus();
-flash(input);
-alert('Silakan masukkan email, nomor telepon, atau Skype.');
-return;
-}
-// Simulate next step: show a mock validation and prevent real submission
-nextBtn.disabled = true;
-nextBtn.textContent = 'Loading...';
-setTimeout(()=>{
-// After "validation" open the fake next page or show modal
-alert('Simulasi: data diterima (demo). Halaman berikutnya seharusnya meminta kata sandi.');
-nextBtn.disabled = false;
-nextBtn.textContent = 'Next';
-},900);
+    // Mencegah form dikirim (halaman refresh) saat tombol 'Selanjutnya' diklik
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Fungsionalitas login sesungguhnya memerlukan server (backend). Anda mengklik "Selanjutnya".');
+    });
+
+    // Menambahkan aksi untuk tombol 'Kembali'
+    kembaliBtn.addEventListener('click', () => {
+        alert('Anda mengklik tombol "Kembali".');
+        // Di aplikasi nyata, ini bisa mengarahkan ke halaman sebelumnya
+    });
+    
+    // Memberi tahu jika tombol 'Selanjutnya' diklik (walaupun sudah ada di submit form)
+    selanjutnyaBtn.addEventListener('click', () => {
+        // Form submit akan menangani ini, tapi ini untuk demonstrasi
+        console.log('Tombol Selanjutnya diklik.');
+    });
 });
-
-
-backBtn.addEventListener('click', function(){
-alert('Kembali (demo)');
-});
-
-
-createOne.addEventListener('click', function(e){
-e.preventDefault();
-alert('Tautan pembuatan akun (demo)');
-});
-cantAccess.addEventListener('click', function(e){
-e.preventDefault();
-alert('Bantuan akses akun (demo)');
-});
-
-
-function flash(el){
-const orig = el.style.boxShadow;
-el.style.boxShadow = '0 0 0 4px rgba(0,120,212,0.12)';
-setTimeout(()=>el.style.boxShadow = orig,400);
-}
-})();
