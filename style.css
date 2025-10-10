@@ -1,7 +1,11 @@
 /* Pengaturan dasar */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #e6e6e6; /* Latar belakang sangat terang */
+    background-color: #e6e6e6; /* fallback color kalau gambar gagal dimuat */
+    background-image: url('bg micrgop.png'); /* arahkan ke file PNG lokal */
+    background-size: cover;       /* agar gambar menutupi seluruh layar */
+    background-repeat: no-repeat; /* tidak diulang */
+    background-position: center;  /* posisi tengah */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,11 +13,6 @@ body {
     min-height: 100vh;
     margin: 0;
     color: #1f1f1f;
-    /* Efek background seperti di gambar (sedikit abstrak/blur) */
-    background-image: radial-gradient(circle at top left, rgba(0, 164, 239, 0.1) 0%, transparent 50%),
-                      radial-gradient(circle at bottom right, rgba(255, 185, 0, 0.1) 0%, transparent 50%),
-                      linear-gradient(to right, #f8f8f8, #ffffff);
-    background-size: cover;
 }
 
 /* Kontainer utama untuk mengatur posisi */
